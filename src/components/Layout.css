@@ -1,6 +1,7 @@
 /* Logo Container */
 .logo-container {
   padding: 28px 24px;
+  text-align: center;
   text-align: left;
   border-bottom: 1px solid #E1E8ED;
   background: linear-gradient(135deg, #E8F8F0 0%, #D4EFDF 100%);

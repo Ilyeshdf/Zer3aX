@@ -1,46 +1,46 @@
 :root {
-  /* Green and Brown Theme */
-  --primary-green: #2d5016;
-  --primary-green-light: #4a7c2c;
-  --primary-green-dark: #1e3810;
-  --accent-green: #6da34d;
-  --accent-green-light: #8bc34a;
-  
-  --primary-brown: #6b4423;
-  --primary-brown-light: #8b5a3c;
-  --primary-brown-dark: #4a2f19;
-  --accent-brown: #a67c52;
-  --accent-brown-light: #d4a574;
-  
-  --bg-primary: #f5f8f3;
+  /* Modern Green and Earthy Brown Theme - Premium Colors */
+  --primary-green: #16a34a;
+  --primary-green-light: #22c55e;
+  --primary-green-dark: #15803d;
+  --accent-green: #4ade80;
+  --accent-green-light: #86efac;
+
+  --primary-brown: #92400e;
+  --primary-brown-light: #b45309;
+  --primary-brown-dark: #78350f;
+  --accent-brown: #d97706;
+  --accent-brown-light: #f59e0b;
+
+  --bg-primary: #f9fafb;
   --bg-secondary: #ffffff;
   --bg-card: #ffffff;
-  --bg-hover: #e8f5e3;
-  
-  --text-primary: #1e3810;
-  --text-secondary: #4a2f19;
+  --bg-hover: #f0fdf4;
+
+  --text-primary: #111827;
+  --text-secondary: #374151;
   --text-muted: #6b7280;
   --text-light: #9ca3af;
-  
+
   --border-color: #d1d5db;
   --border-light: #e5e7eb;
-  
+
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
   --info: #3b82f6;
-  
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-  
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -70,7 +70,12 @@ a:hover {
   color: var(--accent-green);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--text-primary);
   font-weight: 600;
 }
@@ -118,7 +123,9 @@ button:disabled {
   cursor: not-allowed;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   border: 1px solid var(--border-color);
   border-radius: 6px;
   padding: 0.5em 0.75em;
@@ -127,7 +134,9 @@ input, select, textarea {
   transition: border-color 0.2s;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   outline: none;
   border-color: var(--primary-green);
   box-shadow: 0 0 0 3px rgba(45, 80, 22, 0.1);

@@ -1,238 +1,254 @@
-import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Database, 
-  FlaskConical, 
-  TrendingUp, 
-  Map, 
-  Brain, 
-  Sprout,
-  ArrowRight,
-  Activity,
-  Target,
-  MapPin
-} from 'lucide-react';
+import {
+  Card,
+  Row,
+  Col,
+  Statistic,
+  Button,
+  Table,
+  Typography,
+  Space,
+  Tag
+} from 'antd';
+import {
+  ExperimentOutlined,
+  SwapOutlined,
+  RiseOutlined,
+  EnvironmentOutlined,
+  DatabaseOutlined,
+  ThunderboltOutlined,
+  LineChartOutlined,
+  CheckCircleOutlined,
+  SyncOutlined,
+  EnvironmentFilled
+} from '@ant-design/icons';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { kpiData, recentPredictions, trendingSpecies } from '../data/mockData';
-import './Home.css';
+
+const { Title, Paragraph } = Typography;
 
 const Home = () => {
   const navigate = useNavigate();
 
-  const kpiCards = [
-    {
-      title: 'Total Plants',
-      value: kpiData.totalPlants,
-      icon: Sprout,
-      color: 'green',
-      trend: '+2 this month'
-    },
-    {
-      title: 'Traits Analyzed',
-      value: kpiData.totalTraits,
-      icon: FlaskConical,
-      color: 'brown',
-      trend: 'Updated'
-    },
-    {
-      title: 'Avg Success Rate',
-      value: `${kpiData.avgSuccessRate}%`,
-      icon: Target,
-      color: 'green',
-      trend: '+5% from last week'
-    },
-    {
-      title: 'Predictions Today',
-      value: kpiData.predictionsToday,
-      icon: Activity,
-      color: 'brown',
-      trend: 'Active'
-    },
-    {
-      title: 'Top Zone Today',
-      value: kpiData.topZoneToday,
-      icon: MapPin,
-      color: 'green',
-      trend: 'Most popular'
-    }
-  ];
-
-  const features = [
-    {
-      icon: Brain,
-      title: 'Predict Hybrid Success',
-      description: 'AI-powered probability estimation for plant crosses',
-      action: () => navigate('/predict')
-    },
-    {
-      icon: FlaskConical,
-      title: 'Compare Species',
-      description: 'Side-by-side trait analysis and compatibility',
-      action: () => navigate('/compare')
-    },
-    {
-      icon: TrendingUp,
-      title: 'Rank Best Plants',
-      description: 'Performance-based ranking with filters',
-      action: () => navigate('/ranking')
-    },
-    {
-      icon: Map,
-      title: 'Zone Recommendations',
-      description: 'Algerian regional plant matching system',
-      action: () => navigate('/map')
-    },
-    {
-      icon: Brain,
-      title: 'Explainable AI',
-      description: 'Understand model decisions with XAI',
-      action: () => navigate('/predict')
-    },
-    {
-      icon: Database,
-      title: 'Plant Encyclopedia',
-      description: 'Comprehensive trait database access',
-      action: () => navigate('/encyclopedia')
-    }
-  ];
-
   const getSuccessColor = (rate) => {
-    if (rate >= 70) return 'var(--success)';
-    if (rate >= 50) return 'var(--warning)';
-    return 'var(--error)';
+    if (rate >= 70) return 'success';
+    if (rate >= 50) return 'warning';
+    return 'error';
   };
 
+  const columns = [
+    {
+      title: 'Plant A',
+      dataIndex: 'plantA',
+      key: 'plantA',
+      render: (text) => text.split(' ')[0],
+    },
+    {
+      title: 'Plant B',
+      dataIndex: 'plantB',
+      key: 'plantB',
+      render: (text) => text.split(' ')[0],
+    },
+    {
+      title: 'Success Rate',
+      dataIndex: 'successRate',
+      key: 'successRate',
+      render: (rate) => (
+        <Tag color={getSuccessColor(rate)}>{rate}%</Tag>
+      ),
+    },
+    {
+      title: 'Zone',
+      dataIndex: 'zone',
+      key: 'zone',
+    },
+  ];
+
   return (
-    <div className="home">
+    <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 24px' }}>
       {/* Hero Section */}
-      <motion.section 
-        className="hero"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+      <Card
+        style={{
+          marginBottom: 24,
+          background: 'linear-gradient(135deg, #16a34a 0%, #92400e 100%)',
+          border: 'none'
+        }}
       >
-        <h1 className="hero-title">🌱 Zer3aX</h1>
-        <p className="hero-subtitle">Intelligent Plant-Breeding Assistant</p>
-        <p className="hero-description">
-          An AI system that predicts hybrid success, recommends optimal plants, 
-          and analyzes traits using genetic and environmental data for the Algerian market.
-        </p>
-      </motion.section>
+        <div style={{ textAlign: 'center', padding: '40px 20px' }}>
+          <Title style={{ color: 'white', fontSize: '3rem', marginBottom: 8 }}>
+            🌱 Zer3aX
+          </Title>
+          <Title level={3} style={{ color: '#86efac', marginBottom: 16 }}>
+            Intelligent Plant-Breeding Assistant
+          </Title>
+          <Paragraph style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.1rem', maxWidth: 800, margin: '0 auto' }}>
+            An AI system that predicts hybrid success, recommends optimal plants,
+            and analyzes traits using genetic and environmental data for the Algerian market.
+          </Paragraph>
+        </div>
+      </Card>
 
       {/* KPI Cards */}
-      <section className="kpi-section">
-        <h2 className="section-title">Key Metrics</h2>
-        <div className="kpi-grid">
-          {kpiCards.map((kpi, index) => {
-            const Icon = kpi.icon;
-            return (
-              <motion.div
-                key={index}
-                className={`kpi-card kpi-${kpi.color}`}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="kpi-icon">
-                  <Icon size={24} />
-                </div>
-                <div className="kpi-content">
-                  <p className="kpi-title">{kpi.title}</p>
-                  <h3 className="kpi-value">{kpi.value}</h3>
-                  <p className="kpi-trend">{kpi.trend}</p>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
+      <Title level={2} style={{ marginBottom: 16 }}>Key Metrics</Title>
+      <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
+        <Col xs={24} sm={12} lg={8}>
+          <Card hoverable>
+            <Statistic
+              title="Total Plants"
+              value={kpiData.totalPlants}
+              prefix={<DatabaseOutlined style={{ color: '#16a34a' }} />}
+              suffix={<div style={{ fontSize: 12, color: '#6b7280' }}>+2 this month</div>}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={8}>
+          <Card hoverable>
+            <Statistic
+              title="Traits Analyzed"
+              value={kpiData.totalTraits}
+              prefix={<ExperimentOutlined style={{ color: '#92400e' }} />}
+              suffix={<div style={{ fontSize: 12, color: '#6b7280' }}>Updated</div>}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={8}>
+          <Card hoverable>
+            <Statistic
+              title="Avg Success Rate"
+              value={kpiData.avgSuccessRate}
+              prefix={<CheckCircleOutlined style={{ color: '#16a34a' }} />}
+              suffix="%"
+              valueStyle={{ color: '#16a34a' }}
+            />
+            <div style={{ fontSize: 12, color: '#6b7280', marginTop: 8 }}>+5% from last week</div>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={8}>
+          <Card hoverable>
+            <Statistic
+              title="Predictions Today"
+              value={kpiData.predictionsToday}
+              prefix={<SyncOutlined spin style={{ color: '#92400e' }} />}
+              suffix={<div style={{ fontSize: 12, color: '#6b7280' }}>Active</div>}
+            />
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={8}>
+          <Card hoverable>
+            <Statistic
+              title="Top Zone Today"
+              value={kpiData.topZoneToday}
+              prefix={<EnvironmentFilled style={{ color: '#16a34a' }} />}
+              suffix={<div style={{ fontSize: 12, color: '#6b7280' }}>Most popular</div>}
+            />
+          </Card>
+        </Col>
+      </Row>
 
       {/* Features Grid */}
-      <section className="features-section">
-        <h2 className="section-title">What the AI Does</h2>
-        <div className="features-grid">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <motion.div
-                key={index}
-                className="feature-card"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                onClick={feature.action}
-              >
-                <div className="feature-icon">
-                  <Icon size={28} />
-                </div>
-                <h3 className="feature-title">{feature.title}</h3>
-                <p className="feature-description">{feature.description}</p>
-                <div className="feature-arrow">
-                  <ArrowRight size={20} />
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Recent Activity & Insights */}
-      <section className="activity-section">
-        <h2 className="section-title">Recent Activity & Insights</h2>
-        
-        <div className="activity-grid">
-          {/* Recent Predictions Table */}
-          <motion.div
-            className="activity-card"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+      <Title level={2} style={{ marginBottom: 16 }}>What the AI Does</Title>
+      <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
+        <Col xs={24} sm={12} lg={8}>
+          <Card
+            hoverable
+            onClick={() => navigate('/predict')}
+            style={{ height: '100%' }}
           >
-            <h3 className="card-title">Last 5 Predictions</h3>
-            <div className="predictions-table">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Plant A</th>
-                    <th>Plant B</th>
-                    <th>Success %</th>
-                    <th>Zone</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {recentPredictions.map((pred) => (
-                    <tr key={pred.id}>
-                      <td>{pred.plantA.split(' ')[0]}</td>
-                      <td>{pred.plantB.split(' ')[0]}</td>
-                      <td>
-                        <span 
-                          className="success-badge"
-                          style={{ backgroundColor: getSuccessColor(pred.successRate) }}
-                        >
-                          {pred.successRate}%
-                        </span>
-                      </td>
-                      <td>{pred.zone}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </motion.div>
-
-          {/* Trending Species Chart */}
-          <motion.div
-            className="activity-card"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <ThunderboltOutlined style={{ fontSize: 32, color: '#16a34a' }} />
+              <Title level={4}>Predict Hybrid Success</Title>
+              <Paragraph>AI-powered probability estimation for plant crosses</Paragraph>
+            </Space>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={8}>
+          <Card
+            hoverable
+            onClick={() => navigate('/compare')}
+            style={{ height: '100%' }}
           >
-            <h3 className="card-title">Trending Species This Week</h3>
+            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <SwapOutlined style={{ fontSize: 32, color: '#92400e' }} />
+              <Title level={4}>Compare Species</Title>
+              <Paragraph>Side-by-side trait analysis and compatibility</Paragraph>
+            </Space>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={8}>
+          <Card
+            hoverable
+            onClick={() => navigate('/ranking')}
+            style={{ height: '100%' }}
+          >
+            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <RiseOutlined style={{ fontSize: 32, color: '#16a34a' }} />
+              <Title level={4}>Rank Best Plants</Title>
+              <Paragraph>Performance-based ranking with filters</Paragraph>
+            </Space>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={8}>
+          <Card
+            hoverable
+            onClick={() => navigate('/map')}
+            style={{ height: '100%' }}
+          >
+            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <EnvironmentOutlined style={{ fontSize: 32, color: '#92400e' }} />
+              <Title level={4}>Zone Recommendations</Title>
+              <Paragraph>Algerian regional plant matching system</Paragraph>
+            </Space>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={8}>
+          <Card
+            hoverable
+            onClick={() => navigate('/predict')}
+            style={{ height: '100%' }}
+          >
+            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <LineChartOutlined style={{ fontSize: 32, color: '#16a34a' }} />
+              <Title level={4}>Explainable AI</Title>
+              <Paragraph>Understand model decisions with XAI</Paragraph>
+            </Space>
+          </Card>
+        </Col>
+        <Col xs={24} sm={12} lg={8}>
+          <Card
+            hoverable
+            onClick={() => navigate('/encyclopedia')}
+            style={{ height: '100%' }}
+          >
+            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+              <DatabaseOutlined style={{ fontSize: 32, color: '#92400e' }} />
+              <Title level={4}>Plant Encyclopedia</Title>
+              <Paragraph>Comprehensive trait database access</Paragraph>
+            </Space>
+          </Card>
+        </Col>
+      </Row>
+
+      {/* Recent Activity */}
+      <Title level={2} style={{ marginBottom: 16 }}>Recent Activity & Insights</Title>
+      <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
+        <Col xs={24} lg={12}>
+          <Card title="Last 5 Predictions" hoverable>
+            <Table
+              dataSource={recentPredictions}
+              columns={columns}
+              pagination={false}
+              size="small"
+              rowKey="id"
+            />
+          </Card>
+        </Col>
+        <Col xs={24} lg={12}>
+          <Card title="Trending Species This Week" hoverable>
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={trendingSpecies}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-light)" />
-                <XAxis 
-                  dataKey="name" 
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis
+                  dataKey="name"
                   tick={{ fontSize: 11 }}
                   angle={-15}
                   textAnchor="end"
@@ -240,31 +256,29 @@ const Home = () => {
                 />
                 <YAxis tick={{ fontSize: 12 }} />
                 <Tooltip />
-                <Bar dataKey="uses" fill="var(--primary-green)" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="uses" fill="#16a34a" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
-          </motion.div>
-        </div>
-      </section>
+          </Card>
+        </Col>
+      </Row>
 
       {/* Quick Actions */}
-      <section className="quick-actions-section">
-        <h2 className="section-title">Quick Actions</h2>
-        <div className="quick-actions">
-          <button className="action-btn primary" onClick={() => navigate('/predict')}>
-            Generate Prediction
-          </button>
-          <button className="action-btn secondary" onClick={() => navigate('/compare')}>
-            Compare Species
-          </button>
-          <button className="action-btn secondary" onClick={() => navigate('/map')}>
-            Open Map
-          </button>
-          <button className="action-btn secondary" onClick={() => navigate('/ranking')}>
-            View Rankings
-          </button>
-        </div>
-      </section>
+      <Title level={2} style={{ marginBottom: 16 }}>Quick Actions</Title>
+      <Space wrap style={{ marginBottom: 32 }}>
+        <Button type="primary" size="large" onClick={() => navigate('/predict')}>
+          Generate Prediction
+        </Button>
+        <Button size="large" onClick={() => navigate('/compare')}>
+          Compare Species
+        </Button>
+        <Button size="large" onClick={() => navigate('/map')}>
+          Open Map
+        </Button>
+        <Button size="large" onClick={() => navigate('/ranking')}>
+          View Rankings
+        </Button>
+      </Space>
     </div>
   );
 };

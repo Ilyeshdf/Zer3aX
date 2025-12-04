@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
+import AppLayout from './components/Layout';
 import Home from './pages/Home';
 import Predict from './pages/Predict';
 import Compare from './pages/Compare';
@@ -11,7 +11,7 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <Layout>
+      <AppLayout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/predict" element={<Predict />} />
@@ -20,7 +20,7 @@ function App() {
           <Route path="/map" element={<MapView />} />
           <Route path="/encyclopedia" element={<Encyclopedia />} />
         </Routes>
-      </Layout>
+      </AppLayout>
     </Router>
   );
 }

@@ -36,13 +36,13 @@ const Home = () => {
       title: 'Plant A',
       dataIndex: 'plantA',
       key: 'plantA',
-      render: (text) => <Text style={{ color: '#d1d5db' }}>{text.split(' ')[0]}</Text>,
+      render: (text) => <Text style={{ color: '#34495E' }}>{text.split(' ')[0]}</Text>,
     },
     {
       title: 'Plant B',
       dataIndex: 'plantB',
       key: 'plantB',
-      render: (text) => <Text style={{ color: '#d1d5db' }}>{text.split(' ')[0]}</Text>,
+      render: (text) => <Text style={{ color: '#34495E' }}>{text.split(' ')[0]}</Text>,
     },
     {
       title: 'Success Rate',
@@ -50,7 +50,7 @@ const Home = () => {
       key: 'successRate',
       render: (rate) => (
         <Tag
-          color={rate >= 70 ? '#10b981' : rate >= 50 ? '#f59e0b' : '#ef4444'}
+          color={rate >= 70 ? '#2ECC71' : rate >= 50 ? '#F1C40F' : '#E74C3C'}
           style={{ borderRadius: 6, fontWeight: 600 }}
         >
           {rate}%
@@ -61,40 +61,50 @@ const Home = () => {
       title: 'Zone',
       dataIndex: 'zone',
       key: 'zone',
-      render: (text) => <Text style={{ color: '#9ca3af' }}>{text}</Text>,
+      render: (text) => <Text style={{ color: '#7F8C8D' }}>{text}</Text>,
     },
   ];
 
   return (
-    <div style={{ maxWidth: 1400, margin: '0 auto', padding: '24px' }}>
-      {/* Welcome Section */}
-      <div style={{ marginBottom: 32 }}>
-        <Title level={4} style={{ color: '#9ca3af', fontWeight: 400, marginBottom: 8 }}>
-          Here, take a look at your analytics.
+    <div style={{ maxWidth: 1400, margin: '0 auto' }}>
+      {/* Page Header */}
+      <div style={{ marginBottom: 40 }}>
+        <Title level={2} style={{ 
+          color: '#2C3E50', 
+          fontWeight: 700, 
+          marginBottom: 8,
+          fontSize: '2rem',
+          letterSpacing: '-0.02em'
+        }}>
+          Dashboard Overview
         </Title>
+        <Text style={{ color: '#7F8C8D', fontSize: '15px', fontWeight: 400 }}>
+          Here's a look at your analytics and recent activity.
+        </Text>
       </div>
 
       {/* KPI Cards */}
-      <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
+      <Row gutter={[20, 20]} style={{ marginBottom: 40 }}>
         <Col xs={24} sm={12} lg={8}>
           <Card
             bordered={false}
             style={{
-              background: '#1f2937',
-              borderRadius: 12,
-              border: '1px solid #374151'
+              background: '#FFFFFF',
+              borderRadius: 16,
+              border: '1px solid #E1E8ED',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
             }}
           >
             <Statistic
-              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Total Plants</span>}
+              title={<span style={{ color: '#7F8C8D', fontSize: 13, fontWeight: 500 }}>Total Plants</span>}
               value={kpiData.totalPlants}
-              valueStyle={{ color: '#f9fafb', fontSize: 28, fontWeight: 600 }}
-              prefix={<DatabaseOutlined style={{ color: '#3b82f6' }} />}
+              valueStyle={{ color: '#2C3E50', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em' }}
+              prefix={<DatabaseOutlined style={{ color: '#27AE60', fontSize: 24 }} />}
             />
-            <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <ArrowUpOutlined style={{ color: '#10b981', fontSize: 12 }} />
-              <Text style={{ color: '#10b981', fontSize: 12 }}>+2</Text>
-              <Text style={{ color: '#6b7280', fontSize: 12 }}>vs Previous 30 Days</Text>
+            <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <ArrowUpOutlined style={{ color: '#2ECC71', fontSize: 12 }} />
+              <Text style={{ color: '#2ECC71', fontSize: 13, fontWeight: 600 }}>+2</Text>
+              <Text style={{ color: '#95A5A6', fontSize: 12 }}>vs Previous 30 Days</Text>
             </div>
           </Card>
         </Col>
@@ -103,21 +113,22 @@ const Home = () => {
           <Card
             bordered={false}
             style={{
-              background: '#1f2937',
-              borderRadius: 12,
-              border: '1px solid #374151'
+              background: '#FFFFFF',
+              borderRadius: 16,
+              border: '1px solid #E1E8ED',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
             }}
           >
             <Statistic
-              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Traits Analyzed</span>}
+              title={<span style={{ color: '#7F8C8D', fontSize: 13, fontWeight: 500 }}>Traits Analyzed</span>}
               value={kpiData.totalTraits}
-              valueStyle={{ color: '#f9fafb', fontSize: 28, fontWeight: 600 }}
-              prefix={<ExperimentOutlined style={{ color: '#06b6d4' }} />}
+              valueStyle={{ color: '#2C3E50', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em' }}
+              prefix={<ExperimentOutlined style={{ color: '#3498DB', fontSize: 24 }} />}
             />
-            <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <ArrowUpOutlined style={{ color: '#10b981', fontSize: 12 }} />
-              <Text style={{ color: '#10b981', fontSize: 12 }}>+12%</Text>
-              <Text style={{ color: '#6b7280', fontSize: 12 }}>vs Previous 30 Days</Text>
+            <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <ArrowUpOutlined style={{ color: '#2ECC71', fontSize: 12 }} />
+              <Text style={{ color: '#2ECC71', fontSize: 13, fontWeight: 600 }}>+12%</Text>
+              <Text style={{ color: '#95A5A6', fontSize: 12 }}>vs Previous 30 Days</Text>
             </div>
           </Card>
         </Col>
@@ -126,22 +137,23 @@ const Home = () => {
           <Card
             bordered={false}
             style={{
-              background: '#1f2937',
-              borderRadius: 12,
-              border: '1px solid #374151'
+              background: '#FFFFFF',
+              borderRadius: 16,
+              border: '1px solid #E1E8ED',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
             }}
           >
             <Statistic
-              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Avg Success Rate</span>}
+              title={<span style={{ color: '#7F8C8D', fontSize: 13, fontWeight: 500 }}>Avg Success Rate</span>}
               value={kpiData.avgSuccessRate}
               suffix="%"
-              valueStyle={{ color: '#10b981', fontSize: 28, fontWeight: 600 }}
-              prefix={<CheckCircleOutlined style={{ color: '#10b981' }} />}
+              valueStyle={{ color: '#2ECC71', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em' }}
+              prefix={<CheckCircleOutlined style={{ color: '#2ECC71', fontSize: 24 }} />}
             />
-            <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <ArrowUpOutlined style={{ color: '#10b981', fontSize: 12 }} />
-              <Text style={{ color: '#10b981', fontSize: 12 }}>+5%</Text>
-              <Text style={{ color: '#6b7280', fontSize: 12 }}>vs Previous 30 Days</Text>
+            <div style={{ marginTop: 16, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <ArrowUpOutlined style={{ color: '#2ECC71', fontSize: 12 }} />
+              <Text style={{ color: '#2ECC71', fontSize: 13, fontWeight: 600 }}>+5%</Text>
+              <Text style={{ color: '#95A5A6', fontSize: 12 }}>vs Previous 30 Days</Text>
             </div>
           </Card>
         </Col>
@@ -150,19 +162,20 @@ const Home = () => {
           <Card
             bordered={false}
             style={{
-              background: '#1f2937',
-              borderRadius: 12,
-              border: '1px solid #374151'
+              background: '#FFFFFF',
+              borderRadius: 16,
+              border: '1px solid #E1E8ED',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
             }}
           >
             <Statistic
-              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Predictions Today</span>}
+              title={<span style={{ color: '#7F8C8D', fontSize: 13, fontWeight: 500 }}>Predictions Today</span>}
               value={kpiData.predictionsToday}
-              valueStyle={{ color: '#f9fafb', fontSize: 28, fontWeight: 600 }}
-              prefix={<SyncOutlined spin style={{ color: '#f59e0b' }} />}
+              valueStyle={{ color: '#2C3E50', fontSize: 32, fontWeight: 700, letterSpacing: '-0.02em' }}
+              prefix={<SyncOutlined spin style={{ color: '#F1C40F', fontSize: 24 }} />}
             />
-            <div style={{ marginTop: 12 }}>
-              <Text style={{ color: '#6b7280', fontSize: 12 }}>Active</Text>
+            <div style={{ marginTop: 16 }}>
+              <Text style={{ color: '#95A5A6', fontSize: 12 }}>Active</Text>
             </div>
           </Card>
         </Col>
@@ -171,34 +184,36 @@ const Home = () => {
           <Card
             bordered={false}
             style={{
-              background: '#1f2937',
-              borderRadius: 12,
-              border: '1px solid #374151'
+              background: '#FFFFFF',
+              borderRadius: 16,
+              border: '1px solid #E1E8ED',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
             }}
           >
             <Statistic
-              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Top Zone Today</span>}
+              title={<span style={{ color: '#7F8C8D', fontSize: 13, fontWeight: 500 }}>Top Zone Today</span>}
               value={kpiData.topZoneToday}
-              valueStyle={{ color: '#f9fafb', fontSize: 24, fontWeight: 600 }}
-              prefix={<EnvironmentFilled style={{ color: '#3b82f6' }} />}
+              valueStyle={{ color: '#2C3E50', fontSize: 28, fontWeight: 700, letterSpacing: '-0.02em' }}
+              prefix={<EnvironmentFilled style={{ color: '#27AE60', fontSize: 24 }} />}
             />
-            <div style={{ marginTop: 12 }}>
-              <Text style={{ color: '#6b7280', fontSize: 12 }}>Most popular</Text>
+            <div style={{ marginTop: 16 }}>
+              <Text style={{ color: '#95A5A6', fontSize: 12 }}>Most popular</Text>
             </div>
           </Card>
         </Col>
       </Row>
 
       {/* Recent Activity */}
-      <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
+      <Row gutter={[20, 20]} style={{ marginBottom: 32 }}>
         <Col xs={24} lg={12}>
           <Card
-            title={<span style={{ color: '#f9fafb', fontSize: 16, fontWeight: 600 }}>Last 5 Predictions</span>}
+            title={<span style={{ color: '#2C3E50', fontSize: 17, fontWeight: 600 }}>Last 5 Predictions</span>}
             bordered={false}
             style={{
-              background: '#1f2937',
-              borderRadius: 12,
-              border: '1px solid #374151'
+              background: '#FFFFFF',
+              borderRadius: 16,
+              border: '1px solid #E1E8ED',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
             }}
           >
             <Table
@@ -212,35 +227,37 @@ const Home = () => {
         </Col>
         <Col xs={24} lg={12}>
           <Card
-            title={<span style={{ color: '#f9fafb', fontSize: 16, fontWeight: 600 }}>Trending Species This Week</span>}
+            title={<span style={{ color: '#2C3E50', fontSize: 17, fontWeight: 600 }}>Trending Species This Week</span>}
             bordered={false}
             style={{
-              background: '#1f2937',
-              borderRadius: 12,
-              border: '1px solid #374151'
+              background: '#FFFFFF',
+              borderRadius: 16,
+              border: '1px solid #E1E8ED',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)'
             }}
           >
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={trendingSpecies}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#E1E8ED" />
                 <XAxis
                   dataKey="name"
-                  tick={{ fontSize: 11, fill: '#9ca3af' }}
+                  tick={{ fontSize: 11, fill: '#7F8C8D' }}
                   angle={-15}
                   textAnchor="end"
                   height={80}
-                  stroke="#374151"
+                  stroke="#E1E8ED"
                 />
-                <YAxis tick={{ fontSize: 12, fill: '#9ca3af' }} stroke="#374151" />
+                <YAxis tick={{ fontSize: 12, fill: '#7F8C8D' }} stroke="#E1E8ED" />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#1f2937',
-                    border: '1px solid #374151',
+                    backgroundColor: '#FFFFFF',
+                    border: '1px solid #E1E8ED',
                     borderRadius: 8,
-                    color: '#f9fafb'
+                    color: '#2C3E50',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
                   }}
                 />
-                <Bar dataKey="uses" fill="#3b82f6" radius={[8, 8, 0, 0]} />
+                <Bar dataKey="uses" fill="#27AE60" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </Card>

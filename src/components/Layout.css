@@ -1,26 +1,30 @@
 /* Logo Container */
 .logo-container {
-  padding: 24px 16px;
-  text-align: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 28px 24px;
+  text-align: left;
+  border-bottom: 1px solid #E1E8ED;
+  background: linear-gradient(135deg, #E8F8F0 0%, #D4EFDF 100%);
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin: 0;
-  color: white;
+  color: #1E8449;
   font-weight: 700;
+  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 8px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .tagline {
-  font-size: 0.75rem;
-  color: #86efac;
-  margin: 4px 0 0 0;
-  font-weight: 400;
+  font-size: 0.8rem;
+  color: #27AE60;
+  margin: 6px 0 0 0;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 /* Sidebar Footer */
@@ -30,22 +34,24 @@
   left: 0;
   right: 0;
   padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid #E1E8ED;
   text-align: center;
-  background: rgba(0, 0, 0, 0.1);
+  background: #FAFBFC;
 }
 
 .footer-text {
   font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: #7F8C8D;
   margin: 2px 0;
 }
 
 /* Custom Menu Styling */
-.ant-menu-dark .ant-menu-item-selected {
-  background-color: #16a34a !important;
+.ant-menu-light .ant-menu-item-selected {
+  background-color: #D4EFDF !important;
+  color: #1E8449 !important;
 }
 
-.ant-menu-dark .ant-menu-item:hover {
-  background-color: rgba(34, 197, 94, 0.3) !important;
+.ant-menu-light .ant-menu-item:hover {
+  background-color: #E8F8F0 !important;
+  color: #27AE60 !important;
 }

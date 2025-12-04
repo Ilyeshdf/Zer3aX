@@ -53,27 +53,28 @@ const AppLayout = ({ children }) => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: '#3b82f6',
-          colorSuccess: '#10b981',
-          colorWarning: '#f59e0b',
-          colorError: '#ef4444',
-          colorInfo: '#06b6d4',
-          borderRadius: 8,
+          colorPrimary: '#27AE60',
+          colorSuccess: '#2ECC71',
+          colorWarning: '#F1C40F',
+          colorError: '#E74C3C',
+          colorInfo: '#3498DB',
+          borderRadius: 10,
           fontSize: 14,
+          fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
         },
         components: {
           Layout: {
-            siderBg: '#1f2937',
-            triggerBg: '#1f2937',
-            bodyBg: '#111827',
+            siderBg: '#FFFFFF',
+            triggerBg: '#FFFFFF',
+            bodyBg: '#F4F6F7',
           },
           Menu: {
-            darkItemBg: '#1f2937',
-            darkItemSelectedBg: '#374151',
-            darkItemHoverBg: '#374151',
-            darkItemColor: '#9ca3af',
-            darkItemSelectedColor: '#60a5fa',
-            darkItemHoverColor: '#93c5fd',
+            itemBg: '#FFFFFF',
+            itemSelectedBg: '#D4EFDF',
+            itemHoverBg: '#E8F8F0',
+            itemColor: '#2C3E50',
+            itemSelectedColor: '#1E8449',
+            itemHoverColor: '#27AE60',
           },
         },
       }}
@@ -83,7 +84,7 @@ const AppLayout = ({ children }) => {
           collapsible
           collapsed={collapsed}
           onCollapse={setCollapsed}
-          theme="dark"
+          theme="light"
           width={260}
           style={{
             position: 'fixed',
@@ -92,6 +93,8 @@ const AppLayout = ({ children }) => {
             bottom: 0,
             height: '100vh',
             overflow: 'auto',
+            boxShadow: '2px 0 8px rgba(0, 0, 0, 0.08)',
+            borderRight: '1px solid #E1E8ED'
           }}
         >
           <div className="logo-container">
@@ -100,7 +103,7 @@ const AppLayout = ({ children }) => {
           </div>
 
           <Menu
-            theme="dark"
+            theme="light"
             mode="inline"
             selectedKeys={[location.pathname]}
             items={menuItems}
@@ -116,7 +119,7 @@ const AppLayout = ({ children }) => {
         </Sider>
 
         <Layout style={{ marginLeft: collapsed ? 80 : 260, transition: 'margin-left 0.2s' }}>
-          <Content style={{ background: '#111827', minHeight: '100vh' }}>
+          <Content style={{ background: '#F4F6F7', minHeight: '100vh', padding: '32px 40px' }}>
             {children}
           </Content>
         </Layout>

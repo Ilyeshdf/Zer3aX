@@ -110,12 +110,7 @@ const AppLayout = ({ children }) => {
             onClick={handleMenuClick}
           />
 
-          {!collapsed && (
-            <div className="sidebar-footer">
-              <p className="footer-text">© 2025 Zer3aX</p>
-              <p className="footer-text">Algerian Market</p>
-            </div>
-          )}
+       
         </Sider>
 
         <Layout style={{ marginLeft: collapsed ? 80 : 260, transition: 'margin-left 0.2s' }}>

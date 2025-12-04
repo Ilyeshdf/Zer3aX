@@ -5,7 +5,6 @@ import Predict from './pages/Predict';
 import Compare from './pages/Compare';
 import Ranking from './pages/Ranking';
 import MapView from './pages/MapView';
-import Encyclopedia from './pages/Encyclopedia';
 import './App.css';
 
 function App() {
@@ -18,7 +17,6 @@ function App() {
           <Route path="/compare" element={<Compare />} />
           <Route path="/ranking" element={<Ranking />} />
           <Route path="/map" element={<MapView />} />
-          <Route path="/encyclopedia" element={<Encyclopedia />} />
         </Routes>
       </AppLayout>
     </Router>

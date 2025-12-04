@@ -6,8 +6,7 @@ import {
   ExperimentOutlined,
   SwapOutlined,
   RiseOutlined,
-  EnvironmentOutlined,
-  DatabaseOutlined
+  EnvironmentOutlined
 } from '@ant-design/icons';
 import './Layout.css';
 
@@ -44,11 +43,6 @@ const AppLayout = ({ children }) => {
       icon: <EnvironmentOutlined />,
       label: 'Map',
     },
-    {
-      key: '/encyclopedia',
-      icon: <DatabaseOutlined />,
-      label: 'Encyclopedia',
-    },
   ];
 
   const handleMenuClick = ({ key }) => {
@@ -59,23 +53,27 @@ const AppLayout = ({ children }) => {
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: '#16a34a',
+          colorPrimary: '#3b82f6',
           colorSuccess: '#10b981',
           colorWarning: '#f59e0b',
           colorError: '#ef4444',
-          colorInfo: '#3b82f6',
+          colorInfo: '#06b6d4',
           borderRadius: 8,
           fontSize: 14,
         },
         components: {
           Layout: {
-            siderBg: '#15803d',
-            triggerBg: '#15803d',
+            siderBg: '#1f2937',
+            triggerBg: '#1f2937',
+            bodyBg: '#111827',
           },
           Menu: {
-            darkItemBg: '#15803d',
-            darkItemSelectedBg: '#16a34a',
-            darkItemHoverBg: '#22c55e',
+            darkItemBg: '#1f2937',
+            darkItemSelectedBg: '#374151',
+            darkItemHoverBg: '#374151',
+            darkItemColor: '#9ca3af',
+            darkItemSelectedColor: '#60a5fa',
+            darkItemHoverColor: '#93c5fd',
           },
         },
       }}
@@ -87,9 +85,17 @@ const AppLayout = ({ children }) => {
           onCollapse={setCollapsed}
           theme="dark"
           width={260}
+          style={{
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            height: '100vh',
+            overflow: 'auto',
+          }}
         >
           <div className="logo-container">
-            <h2 className="logo">🌱 {!collapsed && 'Zer3aX'}</h2>
+            <h2 className="logo">{!collapsed && 'Zer3aX'}</h2>
             {!collapsed && <p className="tagline">AI Plant Breeding</p>}
           </div>
 
@@ -109,8 +115,8 @@ const AppLayout = ({ children }) => {
           )}
         </Sider>
 
-        <Layout>
-          <Content style={{ padding: '24px 0', background: '#f9fafb' }}>
+        <Layout style={{ marginLeft: collapsed ? 80 : 260, transition: 'margin-left 0.2s' }}>
+          <Content style={{ background: '#111827', minHeight: '100vh' }}>
             {children}
           </Content>
         </Layout>

@@ -4,28 +4,23 @@ import {
   Row,
   Col,
   Statistic,
-  Button,
   Table,
   Typography,
-  Space,
   Tag
 } from 'antd';
 import {
   ExperimentOutlined,
-  SwapOutlined,
-  RiseOutlined,
-  EnvironmentOutlined,
   DatabaseOutlined,
-  ThunderboltOutlined,
-  LineChartOutlined,
   CheckCircleOutlined,
   SyncOutlined,
-  EnvironmentFilled
+  EnvironmentFilled,
+  ArrowUpOutlined,
+  ArrowDownOutlined
 } from '@ant-design/icons';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { kpiData, recentPredictions, trendingSpecies } from '../data/mockData';
 
-const { Title, Paragraph } = Typography;
+const { Title, Text } = Typography;
 
 const Home = () => {
   const navigate = useNavigate();
@@ -41,198 +36,171 @@ const Home = () => {
       title: 'Plant A',
       dataIndex: 'plantA',
       key: 'plantA',
-      render: (text) => text.split(' ')[0],
+      render: (text) => <Text style={{ color: '#d1d5db' }}>{text.split(' ')[0]}</Text>,
     },
     {
       title: 'Plant B',
       dataIndex: 'plantB',
       key: 'plantB',
-      render: (text) => text.split(' ')[0],
+      render: (text) => <Text style={{ color: '#d1d5db' }}>{text.split(' ')[0]}</Text>,
     },
     {
       title: 'Success Rate',
       dataIndex: 'successRate',
       key: 'successRate',
       render: (rate) => (
-        <Tag color={getSuccessColor(rate)}>{rate}%</Tag>
+        <Tag
+          color={rate >= 70 ? '#10b981' : rate >= 50 ? '#f59e0b' : '#ef4444'}
+          style={{ borderRadius: 6, fontWeight: 600 }}
+        >
+          {rate}%
+        </Tag>
       ),
     },
     {
       title: 'Zone',
       dataIndex: 'zone',
       key: 'zone',
+      render: (text) => <Text style={{ color: '#9ca3af' }}>{text}</Text>,
     },
   ];
 
   return (
-    <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 24px' }}>
-      {/* Hero Section */}
-      <Card
-        style={{
-          marginBottom: 24,
-          background: 'linear-gradient(135deg, #16a34a 0%, #92400e 100%)',
-          border: 'none'
-        }}
-      >
-        <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-          <Title style={{ color: 'white', fontSize: '3rem', marginBottom: 8 }}>
-            🌱 Zer3aX
-          </Title>
-          <Title level={3} style={{ color: '#86efac', marginBottom: 16 }}>
-            Intelligent Plant-Breeding Assistant
-          </Title>
-          <Paragraph style={{ color: 'rgba(255,255,255,0.9)', fontSize: '1.1rem', maxWidth: 800, margin: '0 auto' }}>
-            An AI system that predicts hybrid success, recommends optimal plants,
-            and analyzes traits using genetic and environmental data for the Algerian market.
-          </Paragraph>
-        </div>
-      </Card>
+    <div style={{ maxWidth: 1400, margin: '0 auto', padding: '24px' }}>
+      {/* Welcome Section */}
+      <div style={{ marginBottom: 32 }}>
+        <Title level={4} style={{ color: '#9ca3af', fontWeight: 400, marginBottom: 8 }}>
+          Here, take a look at your analytics.
+        </Title>
+      </div>
 
       {/* KPI Cards */}
-      <Title level={2} style={{ marginBottom: 16 }}>Key Metrics</Title>
       <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
         <Col xs={24} sm={12} lg={8}>
-          <Card hoverable>
+          <Card
+            bordered={false}
+            style={{
+              background: '#1f2937',
+              borderRadius: 12,
+              border: '1px solid #374151'
+            }}
+          >
             <Statistic
-              title="Total Plants"
+              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Total Plants</span>}
               value={kpiData.totalPlants}
-              prefix={<DatabaseOutlined style={{ color: '#16a34a' }} />}
-              suffix={<div style={{ fontSize: 12, color: '#6b7280' }}>+2 this month</div>}
+              valueStyle={{ color: '#f9fafb', fontSize: 28, fontWeight: 600 }}
+              prefix={<DatabaseOutlined style={{ color: '#3b82f6' }} />}
             />
+            <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <ArrowUpOutlined style={{ color: '#10b981', fontSize: 12 }} />
+              <Text style={{ color: '#10b981', fontSize: 12 }}>+2</Text>
+              <Text style={{ color: '#6b7280', fontSize: 12 }}>vs Previous 30 Days</Text>
+            </div>
           </Card>
         </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <Card hoverable>
-            <Statistic
-              title="Traits Analyzed"
-              value={kpiData.totalTraits}
-              prefix={<ExperimentOutlined style={{ color: '#92400e' }} />}
-              suffix={<div style={{ fontSize: 12, color: '#6b7280' }}>Updated</div>}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <Card hoverable>
-            <Statistic
-              title="Avg Success Rate"
-              value={kpiData.avgSuccessRate}
-              prefix={<CheckCircleOutlined style={{ color: '#16a34a' }} />}
-              suffix="%"
-              valueStyle={{ color: '#16a34a' }}
-            />
-            <div style={{ fontSize: 12, color: '#6b7280', marginTop: 8 }}>+5% from last week</div>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <Card hoverable>
-            <Statistic
-              title="Predictions Today"
-              value={kpiData.predictionsToday}
-              prefix={<SyncOutlined spin style={{ color: '#92400e' }} />}
-              suffix={<div style={{ fontSize: 12, color: '#6b7280' }}>Active</div>}
-            />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <Card hoverable>
-            <Statistic
-              title="Top Zone Today"
-              value={kpiData.topZoneToday}
-              prefix={<EnvironmentFilled style={{ color: '#16a34a' }} />}
-              suffix={<div style={{ fontSize: 12, color: '#6b7280' }}>Most popular</div>}
-            />
-          </Card>
-        </Col>
-      </Row>
 
-      {/* Features Grid */}
-      <Title level={2} style={{ marginBottom: 16 }}>What the AI Does</Title>
-      <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
         <Col xs={24} sm={12} lg={8}>
           <Card
-            hoverable
-            onClick={() => navigate('/predict')}
-            style={{ height: '100%' }}
+            bordered={false}
+            style={{
+              background: '#1f2937',
+              borderRadius: 12,
+              border: '1px solid #374151'
+            }}
           >
-            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-              <ThunderboltOutlined style={{ fontSize: 32, color: '#16a34a' }} />
-              <Title level={4}>Predict Hybrid Success</Title>
-              <Paragraph>AI-powered probability estimation for plant crosses</Paragraph>
-            </Space>
+            <Statistic
+              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Traits Analyzed</span>}
+              value={kpiData.totalTraits}
+              valueStyle={{ color: '#f9fafb', fontSize: 28, fontWeight: 600 }}
+              prefix={<ExperimentOutlined style={{ color: '#06b6d4' }} />}
+            />
+            <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <ArrowUpOutlined style={{ color: '#10b981', fontSize: 12 }} />
+              <Text style={{ color: '#10b981', fontSize: 12 }}>+12%</Text>
+              <Text style={{ color: '#6b7280', fontSize: 12 }}>vs Previous 30 Days</Text>
+            </div>
           </Card>
         </Col>
+
         <Col xs={24} sm={12} lg={8}>
           <Card
-            hoverable
-            onClick={() => navigate('/compare')}
-            style={{ height: '100%' }}
+            bordered={false}
+            style={{
+              background: '#1f2937',
+              borderRadius: 12,
+              border: '1px solid #374151'
+            }}
           >
-            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-              <SwapOutlined style={{ fontSize: 32, color: '#92400e' }} />
-              <Title level={4}>Compare Species</Title>
-              <Paragraph>Side-by-side trait analysis and compatibility</Paragraph>
-            </Space>
+            <Statistic
+              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Avg Success Rate</span>}
+              value={kpiData.avgSuccessRate}
+              suffix="%"
+              valueStyle={{ color: '#10b981', fontSize: 28, fontWeight: 600 }}
+              prefix={<CheckCircleOutlined style={{ color: '#10b981' }} />}
+            />
+            <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <ArrowUpOutlined style={{ color: '#10b981', fontSize: 12 }} />
+              <Text style={{ color: '#10b981', fontSize: 12 }}>+5%</Text>
+              <Text style={{ color: '#6b7280', fontSize: 12 }}>vs Previous 30 Days</Text>
+            </div>
           </Card>
         </Col>
+
         <Col xs={24} sm={12} lg={8}>
           <Card
-            hoverable
-            onClick={() => navigate('/ranking')}
-            style={{ height: '100%' }}
+            bordered={false}
+            style={{
+              background: '#1f2937',
+              borderRadius: 12,
+              border: '1px solid #374151'
+            }}
           >
-            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-              <RiseOutlined style={{ fontSize: 32, color: '#16a34a' }} />
-              <Title level={4}>Rank Best Plants</Title>
-              <Paragraph>Performance-based ranking with filters</Paragraph>
-            </Space>
+            <Statistic
+              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Predictions Today</span>}
+              value={kpiData.predictionsToday}
+              valueStyle={{ color: '#f9fafb', fontSize: 28, fontWeight: 600 }}
+              prefix={<SyncOutlined spin style={{ color: '#f59e0b' }} />}
+            />
+            <div style={{ marginTop: 12 }}>
+              <Text style={{ color: '#6b7280', fontSize: 12 }}>Active</Text>
+            </div>
           </Card>
         </Col>
+
         <Col xs={24} sm={12} lg={8}>
           <Card
-            hoverable
-            onClick={() => navigate('/map')}
-            style={{ height: '100%' }}
+            bordered={false}
+            style={{
+              background: '#1f2937',
+              borderRadius: 12,
+              border: '1px solid #374151'
+            }}
           >
-            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-              <EnvironmentOutlined style={{ fontSize: 32, color: '#92400e' }} />
-              <Title level={4}>Zone Recommendations</Title>
-              <Paragraph>Algerian regional plant matching system</Paragraph>
-            </Space>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <Card
-            hoverable
-            onClick={() => navigate('/predict')}
-            style={{ height: '100%' }}
-          >
-            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-              <LineChartOutlined style={{ fontSize: 32, color: '#16a34a' }} />
-              <Title level={4}>Explainable AI</Title>
-              <Paragraph>Understand model decisions with XAI</Paragraph>
-            </Space>
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} lg={8}>
-          <Card
-            hoverable
-            onClick={() => navigate('/encyclopedia')}
-            style={{ height: '100%' }}
-          >
-            <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-              <DatabaseOutlined style={{ fontSize: 32, color: '#92400e' }} />
-              <Title level={4}>Plant Encyclopedia</Title>
-              <Paragraph>Comprehensive trait database access</Paragraph>
-            </Space>
+            <Statistic
+              title={<span style={{ color: '#9ca3af', fontSize: 13 }}>Top Zone Today</span>}
+              value={kpiData.topZoneToday}
+              valueStyle={{ color: '#f9fafb', fontSize: 24, fontWeight: 600 }}
+              prefix={<EnvironmentFilled style={{ color: '#3b82f6' }} />}
+            />
+            <div style={{ marginTop: 12 }}>
+              <Text style={{ color: '#6b7280', fontSize: 12 }}>Most popular</Text>
+            </div>
           </Card>
         </Col>
       </Row>
 
       {/* Recent Activity */}
-      <Title level={2} style={{ marginBottom: 16 }}>Recent Activity & Insights</Title>
       <Row gutter={[16, 16]} style={{ marginBottom: 32 }}>
         <Col xs={24} lg={12}>
-          <Card title="Last 5 Predictions" hoverable>
+          <Card
+            title={<span style={{ color: '#f9fafb', fontSize: 16, fontWeight: 600 }}>Last 5 Predictions</span>}
+            bordered={false}
+            style={{
+              background: '#1f2937',
+              borderRadius: 12,
+              border: '1px solid #374151'
+            }}
+          >
             <Table
               dataSource={recentPredictions}
               columns={columns}
@@ -243,42 +211,41 @@ const Home = () => {
           </Card>
         </Col>
         <Col xs={24} lg={12}>
-          <Card title="Trending Species This Week" hoverable>
+          <Card
+            title={<span style={{ color: '#f9fafb', fontSize: 16, fontWeight: 600 }}>Trending Species This Week</span>}
+            bordered={false}
+            style={{
+              background: '#1f2937',
+              borderRadius: 12,
+              border: '1px solid #374151'
+            }}
+          >
             <ResponsiveContainer width="100%" height={250}>
               <BarChart data={trendingSpecies}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
                 <XAxis
                   dataKey="name"
-                  tick={{ fontSize: 11 }}
+                  tick={{ fontSize: 11, fill: '#9ca3af' }}
                   angle={-15}
                   textAnchor="end"
                   height={80}
+                  stroke="#374151"
                 />
-                <YAxis tick={{ fontSize: 12 }} />
-                <Tooltip />
-                <Bar dataKey="uses" fill="#16a34a" radius={[8, 8, 0, 0]} />
+                <YAxis tick={{ fontSize: 12, fill: '#9ca3af' }} stroke="#374151" />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: '#1f2937',
+                    border: '1px solid #374151',
+                    borderRadius: 8,
+                    color: '#f9fafb'
+                  }}
+                />
+                <Bar dataKey="uses" fill="#3b82f6" radius={[8, 8, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </Card>
         </Col>
       </Row>
-
-      {/* Quick Actions */}
-      <Title level={2} style={{ marginBottom: 16 }}>Quick Actions</Title>
-      <Space wrap style={{ marginBottom: 32 }}>
-        <Button type="primary" size="large" onClick={() => navigate('/predict')}>
-          Generate Prediction
-        </Button>
-        <Button size="large" onClick={() => navigate('/compare')}>
-          Compare Species
-        </Button>
-        <Button size="large" onClick={() => navigate('/map')}>
-          Open Map
-        </Button>
-        <Button size="large" onClick={() => navigate('/ranking')}>
-          View Rankings
-        </Button>
-      </Space>
     </div>
   );
 };

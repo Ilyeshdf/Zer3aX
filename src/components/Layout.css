@@ -1,27 +1,28 @@
 /* Logo Container */
 .logo-container {
-  padding: 28px 24px;
+  padding: 12px 24px 16px 24px;
   text-align: center;
-  text-align: left;
   border-bottom: 1px solid #E1E8ED;
   background: linear-gradient(135deg, #E8F8F0 0%, #D4EFDF 100%);
 }
 
 .logo {
   font-size: 1.75rem;
+  text-align: center;
   margin: 0;
   color: #1E8449;
   font-weight: 700;
   letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 8px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .tagline {
   font-size: 0.8rem;
+  text-align: center;
   color: #27AE60;
   margin: 6px 0 0 0;
   font-weight: 500;

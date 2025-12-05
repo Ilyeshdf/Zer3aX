@@ -98,7 +98,7 @@ const AppLayout = ({ children }) => {
           }}
         >
           <div className="logo-container">
-            <h2 className="logo">{!collapsed && 'Zer3aX'}</h2>
+            <h2 className="logo">{collapsed ? 'Z' : 'Zer3aX'}</h2>
             {!collapsed && <p className="tagline">AI Plant Breeding</p>}
           </div>
 
